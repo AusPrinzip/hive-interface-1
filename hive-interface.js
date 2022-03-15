@@ -325,7 +325,7 @@ class Hive {
 				}
 			} else {
 				// If we have a new block, process it
-				this.processBlock(this.last_block + 1, cur_block_num);
+				await this.processBlock(this.last_block + 1, cur_block_num);
 				if(this._options.on_virtual_op)
 					await this.getVirtualOps(result.last_irreversible_block_num);
 			}
@@ -369,7 +369,7 @@ class Hive {
 		utils.log(`Processing block [${block_num}], Head Block: ${cur_block_num}, Blocks to head: ${cur_block_num - block_num}`, block_num % 1000 == 0 ? 1 : 4);
 
 		this.last_block = block_num;
-		
+
 		if(!block || !block.transactions) {
 			// Block couldn't be loaded...this is typically because it hasn't been created yet
 			utils.log('Error loading block [' + block_num + ']', 4);
